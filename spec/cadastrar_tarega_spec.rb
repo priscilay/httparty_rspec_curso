@@ -8,10 +8,11 @@ describe 'cadastrar' do
         }.to_json
 
         @login = Login.post('/sessions', body: @body)
+        puts @login
     end
 
     context 'tarefas' do
-        before { login('brunobatista66@gmail.com', '123456')}
+        before { login('pri.ribeirofranca@gmail.com', '123456')}
 
         it 'com sucesso' do
             @header = {
@@ -31,6 +32,7 @@ describe 'cadastrar' do
 
             @tarefas_cadastrar = Cadastrar.post('/tasks', body: @body, headers: @header)
             puts @tarefas_cadastrar.body
+            expect(@tarefas_cadastrar.parsed_response['data']['attributes']['title']). to eq 'criei Tarefa 27'
         end
     end
 end
